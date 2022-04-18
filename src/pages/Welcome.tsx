@@ -1,29 +1,35 @@
-import React from "react";
+import React, { useState } from "react";
 
-import { SafeAreaView, Text, Image, TouchableOpacity, StyleSheet, View } from "react-native";
+import { Text, Image, StyleSheet, View } from "react-native";
 
-import wateringImg from "../../assets/watering.png"
+import wateringImg from "../assets/watering.png"
+import { Button } from "../components/Button";
+import colors from "../styles/colors";
 
 export function Welcome() {
+  const [visible, setVisible] = useState(false);
+
+  function handleVisibility(){
+    setVisible(true)
+  }
   return(
-    <SafeAreaView style={styles.container}>
-      <Text style={styles.text}>
-        Gerencie suas plantas de forma fácil
+    <View style={styles.container}>
+      <Text style={styles.title}>
+        Gerencie {'\n'}
+        suas plantas {'\n'}
+        de forma fácil
       </Text>
-
-      <Image source={wateringImg} />
-
+      {
+        visible &&
+        <Image source={wateringImg} style={styles.image} />
+      }
       <Text style={styles.subtitle}>
         Não esqueça mais de regar suas plantas. 
         Nós cuidamos de lembrar você sempre que precisar.
       </Text>
 
-      <TouchableOpacity style={styles.button}>
-        <Text>
-
-        </Text>
-      </TouchableOpacity>
-    </SafeAreaView>
+      <Button title="Imagem" onPress={handleVisibility}/>
+    </View>
   )
 }
 
@@ -31,18 +37,23 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    paddingHorizontal: 20,
   },
   title: {
-    fontSize: 32,
+    fontSize: 26,
     fontWeight: 'bold',
     textAlign: 'center',
-    color: ;
+    color: colors.heading
   },
   subtitle: {
-
+    textAlign: 'center',
+    fontSize: 14,
+    paddingHorizontal: 20,
+    color: colors.heading
   },
-  button: {
-
+  image: {
+    width: 292,
+    height: 284
   }
 });
